@@ -1,0 +1,35 @@
+services:
+  server:
+    build:
+      context: ./server
+    volumes:
+      - ./server:/app
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - mongodb
+
+  client:
+    build:
+      context: ./client
+    volumes:
+      - ./client:/app
+    ports:
+      - 3000:80
+    depends_on:
+      - server
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_DB: technical-assessment
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: mongopassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+
+volumes:
+  mongodb:
