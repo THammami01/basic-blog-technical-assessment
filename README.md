@@ -8,6 +8,9 @@ Run the client, server and database all at once with Docker Compose:
 docker-compose up -d
 ```
 
+The front-end should run on port `3000`, the back-end on port `8000`, and the database on port `27017`.<br />
+Make sure that these ports aren't reserved on your machine or you will face an error.
+
 ## Cleanup
 
 Remove all created images and containers:
